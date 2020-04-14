@@ -1,0 +1,9 @@
+Date: 14/4/20
+
+Upon running this project, a page will open which will contain some text and a button.
+
+When you click on the button 3 divs, each containing one line of a person's information and one input box.
+
+When you change the values in the input box , the person's name would change.
+
+When you click on the div the it will be removed from the list.
