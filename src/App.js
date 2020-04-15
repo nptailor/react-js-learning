@@ -1,7 +1,24 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
+import styles from './App.module.css'
+/* import styled from 'styled-components'; */
 
+
+
+// Css Using styled components
+          /* const StyleButton = styled.button`
+            background-color:${props => props.alt? 'red' : 'green'};
+            color:white;
+            font: inherit;
+            border: 1px solid blue;
+            padding:10px;
+            cursor: pointer;
+
+            &:hover{
+              background-color: ${props => props.alt? 'salmon' : 'lightgreen'};;
+              color:black;}
+          `; */
 
 
 class App extends Component {
@@ -60,21 +77,36 @@ class App extends Component {
       this.setState({person: persons});
     }
 
-
+    
     //render function , that sends data to the html
     render(){
+
         //in-line styling for button
-        const style={
-          backgroundColor:'lightblue',
-          font: 'inherit',
-          border: '1px solid blue',
-          padding:'10px',
-          cursor: 'pointer'
-        };
+              /*  const style={
+                  backgroundColor:'green',
+                  color:'white',
+                  font: 'inherit',
+                  border: '1px solid blue',
+                  padding:'10px',
+                  cursor: 'pointer',
+                  ':hover': {
+                    backgroundColor: 'lightgreen',
+                    color:'black'
+                  }
+                }; */
         
         //variable used to display no persons data on page load and on button clicking
         let persons = null;
-        
+        let btnClass = [styles.Button]
+        //varaible used for dynamically styling text
+        const classes=[];
+        if (this.state.person.length <=2){
+          classes.push(styles.red);
+        }
+        if(this.state.person.length <=1){
+          classes.push(styles.bold);
+        }
+
         //if condition used to display person's data based on its boolean value
         if(this.state.showPersons === true){
           persons = (
@@ -91,16 +123,25 @@ class App extends Component {
               }
             </div>
           );
+
+          btnClass.push(styles.Red);
+          // Styles using style-components
+         /*  style.backgroundColor='red';
+          style[':hover'] ={
+            backgroundColor: 'salmon',
+            color:'black'
+          } */
         }
 
 
         return (
-          <div className="App">
+            <div className="App">
             <h1>Hi React App</h1>
-            <p>Hi I am a paragraph in react App</p>
+            <p className={classes.join(' ')}>Hi I am a paragraph in react App</p>
             <button 
-              style={style}
-              onClick={this.togglePersonsHandler}>Switch Name
+              className={btnClass.join(' ')}
+              alt={this.state.showPersons}
+              onClick={this.togglePersonsHandler}>Toggle Person
             </button>
 
             {/*  Data shown based on the persons value */}
