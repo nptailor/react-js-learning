@@ -31,3 +31,15 @@
   .Button.Red:hover{
       background-color: salmon;
   }
+
+  .Text{
+      color: black;
+  }
+
+  .Text.Red{
+      color: red;
+  }
+
+  .Text.Bold{
+      font-weight: bolder;
+  }

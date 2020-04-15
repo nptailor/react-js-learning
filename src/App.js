@@ -98,13 +98,14 @@ class App extends Component {
         //variable used to display no persons data on page load and on button clicking
         let persons = null;
         let btnClass = [styles.Button]
+        
         //varaible used for dynamically styling text
-        const classes=[];
+        const classes=[styles.Text];
         if (this.state.person.length <=2){
-          classes.push(styles.red);
+          classes.push(styles.Red);
         }
         if(this.state.person.length <=1){
-          classes.push(styles.bold);
+          classes.push(styles.Bold);
         }
 
         //if condition used to display person's data based on its boolean value

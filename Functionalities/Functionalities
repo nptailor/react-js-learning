@@ -7,3 +7,16 @@ When you click on the button 3 divs, each containing one line of a person's info
 When you change the values in the input box , the person's name would change.
 
 When you click on the div the it will be removed from the list.
+
+
+Date: 15/4/20  (CSS stylings added)
+
+The button is green originally , it will turn red when persons are displayed.
+
+The hover effect is given on the button.
+
+If number of persons in the list are <= 2 the text 'Hi I am a paragraph in react App' will turn red.
+
+If number of persons in list are <=2 the text 'Hi I am a paragraph in react App' will turn red and bold.
+
+All elements are styled using css modules for react .
