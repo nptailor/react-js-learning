@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import './App.css';
-import Person from './Person/Person';
-import styles from './App.module.css'
+import classes from './App.module.css';
+import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit';
+import withClass from '../hoc/withClass'
+import Aux from '../hoc/Aux'
 /* import styled from 'styled-components'; */
 
 
@@ -29,7 +31,9 @@ class App extends Component {
         {id:'abc2',name:"Dan", age:38},
         {id:'abc3',name:"Olivia", age:30}
       ],
-      showPersons:false
+      showPersons:false,
+      showCockpit:true,
+      changeCounter:0
     })
 
   //function that changes name of persons on click
@@ -59,8 +63,13 @@ class App extends Component {
       const persons = [...this.state.person]
       persons[personIndex] = prsn;
 
-      this.setState({person: persons})
-    }
+      this.setState((prevState,props)=>
+      { return{
+        person: persons, 
+        changeCounter: prevState.changeCounter +1
+      };
+    });
+  };
 
 
     //function that shows/hides data of persons on button click
@@ -80,7 +89,7 @@ class App extends Component {
     
     //render function , that sends data to the html
     render(){
-
+        console.log('[App.js] rendering...')
         //in-line styling for button
               /*  const style={
                   backgroundColor:'green',
@@ -97,35 +106,23 @@ class App extends Component {
         
         //variable used to display no persons data on page load and on button clicking
         let persons = null;
-        let btnClass = [styles.Button]
+        
         
         //varaible used for dynamically styling text
-        const classes=[styles.Text];
-        if (this.state.person.length <=2){
-          classes.push(styles.Red);
-        }
-        if(this.state.person.length <=1){
-          classes.push(styles.Bold);
-        }
+       
 
         //if condition used to display person's data based on its boolean value
         if(this.state.showPersons === true){
           persons = (
             <div>
               {
-                this.state.person.map((prsn,index) => {
-                return <Person 
-                name={prsn.name} 
-                age={prsn.age}
-                click={this.deletePersonHandler.bind(this,index)}
-                key={prsn.id}
-                changed={(event) => this.changeNameHandler(event,prsn.id)}/>
-              })
+                <Persons 
+                  person={this.state.person} 
+                  clicked={this.deletePersonHandler} 
+                  changed={this.changeNameHandler}/>
               }
             </div>
           );
-
-          btnClass.push(styles.Red);
           // Styles using style-components
          /*  style.backgroundColor='red';
           style[':hover'] ={
@@ -136,21 +133,20 @@ class App extends Component {
 
 
         return (
-            <div className="App">
-            <h1>Hi React App</h1>
-            <p className={classes.join(' ')}>Hi I am a paragraph in react App</p>
-            <button 
-              className={btnClass.join(' ')}
-              alt={this.state.showPersons}
-              onClick={this.togglePersonsHandler}>Toggle Person
-            </button>
-
-            {/*  Data shown based on the persons value */}
-            {persons}
-          </div>
+            <Aux>
+              <button onClick={()=>{this.setState({showCockpit:false})}}>Show Cockpit</button>
+              { this.state.showCockpit ?
+              <Cockpit 
+                title={this.props.pageTitle}
+                personLength={this.state.person.length} 
+                showPersons={this.state.showPersons}
+                clicked={this.togglePersonsHandler}/>:null}
+              {/*  Data shown based on the persons value */}
+              {persons}
+          </Aux>
         );
         // return React.createElement('div',{className: 'App'},React.createElement('h1',null,"Hi i am from create element"))
       }
 }
 
-export default App;
+export default withClass(App,classes.App);

@@ -1,16 +1,12 @@
-.App {
-    text-align: center;
-  }
-  
-  .red{
+.red{
     color: red;
   }
   
-  .bold{
+.bold{
     font-weight: bolder;
-  }
+}
   
-  .Button{
+.Button{
     background-color:green;
     color:white;
     font: inherit;
@@ -18,28 +14,28 @@
     padding:10px;
     cursor: pointer;
   }
-  
-  .Button:hover{
+
+.Button:hover{
     background-color:lightgreen;
     color:black;
   }
 
-  .Button.Red{
+.Button.Red{
       background-color: red;
   }
 
-  .Button.Red:hover{
+.Button.Red:hover{
       background-color: salmon;
   }
 
-  .Text{
+.Text{
       color: black;
   }
 
-  .Text.Red{
+.Text.Red{
       color: red;
   }
 
-  .Text.Bold{
+.Text.Bold{
       font-weight: bolder;
   }
