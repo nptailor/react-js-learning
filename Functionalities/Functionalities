@@ -6,6 +6,8 @@ When you click on the button 3 divs, each containing one line of a person's info
 
 When you change the values in the input box , the person's name would change.
 
+The last input box will have the focus.
+
 When you click on the div the it will be removed from the list.
 
 The button is green originally , it will turn red when persons are displayed.
