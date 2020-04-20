@@ -4,6 +4,7 @@ import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass'
 import Aux from '../hoc/Aux'
+import AuthContext from '../context/auth-context'
 /* import styled from 'styled-components'; */
 
 
@@ -33,7 +34,8 @@ class App extends Component {
       ],
       showPersons:false,
       showCockpit:true,
-      changeCounter:0
+      changeCounter:0,
+      authenticated: false
     })
 
   //function that changes name of persons on click
@@ -86,6 +88,13 @@ class App extends Component {
       this.setState({person: persons});
     }
 
+    // function for authentication
+    loginHandler = () =>{
+      this.setState({
+        authenticated: true
+      })
+    }
+
     
     //render function , that sends data to the html
     render(){
@@ -119,7 +128,8 @@ class App extends Component {
                 <Persons 
                   person={this.state.person} 
                   clicked={this.deletePersonHandler} 
-                  changed={this.changeNameHandler}/>
+                  changed={this.changeNameHandler}
+                  isAuthenticated= {this.state.authenticated}/>
               }
             </div>
           );
@@ -131,18 +141,21 @@ class App extends Component {
           } */
         }
 
-
         return (
             <Aux>
               <button onClick={()=>{this.setState({showCockpit:false})}}>Show Cockpit</button>
+              <AuthContext.Provider value={{authenticated: this.state.authenticated, login: this.loginHandler}}>
               { this.state.showCockpit ?
               <Cockpit 
                 title={this.props.pageTitle}
                 personLength={this.state.person.length} 
                 showPersons={this.state.showPersons}
-                clicked={this.togglePersonsHandler}/>:null}
+                clicked={this.togglePersonsHandler}
+                login={this.loginHandler}
+                />:null}
               {/*  Data shown based on the persons value */}
               {persons}
+              </AuthContext.Provider>
           </Aux>
         );
         // return React.createElement('div',{className: 'App'},React.createElement('h1',null,"Hi i am from create element"))

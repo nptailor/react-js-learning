@@ -20,3 +20,6 @@ If number of persons in list are <=2 the text 'Hi I am a paragraph in react App'
 
 All elements are styled using css modules for react .
 
+
+[Date: 20/4/20]
+Now the three divs with appear on load of page as used Refs for it.

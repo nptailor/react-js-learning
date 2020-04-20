@@ -2,6 +2,7 @@ import React,{Component,Fragment} from 'react';
 import classes from './Person.module.css';
 import withClass from '../../../hoc/withClass'
 import PropTypes from 'prop-types';
+import AuthContext from '../../../context/auth-context'
 /* import styled from 'styled-components'; */
 
 
@@ -19,6 +20,8 @@ import PropTypes from 'prop-types';
     }
 ` */
 class Person extends Component{
+
+    static contextType =AuthContext
     constructor(props){
         super(props);
         this.inputElementRef = React.createRef();
@@ -29,6 +32,7 @@ class Person extends Component{
     render(){
         return (
             <Fragment>
+                    {this.context.authenticated?  <p>Authenticated</p> : <p>Please Login</p>}
                     <p onClick={this.props.click} >I am {this.props.name}. My age is {this.props.age}</p>
                     <p>{this.props.children}</p>
                     <input 
